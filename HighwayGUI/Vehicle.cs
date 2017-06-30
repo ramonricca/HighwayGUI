@@ -150,7 +150,7 @@ namespace HighwayGUI
         //====================================================================
         public void calcCurrentDistanceTick()
         {
-            numMiles += currentSpeed / 15;
+            numMiles += currentSpeed / 10;
         }
 
         //====================================================================

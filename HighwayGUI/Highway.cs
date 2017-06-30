@@ -88,8 +88,8 @@ namespace HighwayGUI
             {
                 if (vehicleList[i].NumMiles >= milesToExitRamp)
                 {
-                    int idx = i + 1;
-                    tmp = idx + " has exited!";
+                    //int idx = i + 1;
+                    //tmp = idx + " has exited!";
                     tmp += AnnounceExitRamp(vehicleList[i]);
                     removeList.Add(vehicleList[i]);
                 }

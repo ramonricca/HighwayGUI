@@ -119,7 +119,6 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // HWindow
@@ -135,6 +134,9 @@
             this.Controls.Add(this.reportText);
             this.Controls.Add(this.minuteText);
             this.Controls.Add(this.minuteLabel);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(600, 400);
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "HWindow";
             this.Text = "Highway Window";
             this.ResumeLayout(false);

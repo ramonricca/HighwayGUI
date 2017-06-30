@@ -12,6 +12,7 @@ namespace HighwayGUI
 {
     public partial class HWindow : Form
     {
+        private const int graphicsmargin = 10;
         private Highway myWay;
         private int currentMinute;
         private int maxMinutes;
@@ -35,11 +36,12 @@ namespace HighwayGUI
             maxMinutes = minutes;
             setMinuteText();
             gPicBox = new Rectangle(
-                this.Left + 10,
-                this.Top + 10,
-                this.Width - 30,
-                reportText.Top - 40);
+                this.Left + graphicsmargin,
+                this.Top + graphicsmargin,
+                this.Width - (4 * graphicsmargin),
+                reportText.Top - (2 * graphicsmargin));
             startstop = false;
+            DrawVehicles();
         }
 
         public void setMinuteText()
@@ -95,12 +97,22 @@ namespace HighwayGUI
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            myWay.IncreaseDistanceAll();
-            currentMinute++;
-            setMinuteText();
-            //reportText.AppendText(myWay.List());
-            reportText.AppendText(myWay.CheckIfExited());
-            DrawVehicles();
+            if (currentMinute < maxMinutes)
+            {
+                myWay.IncreaseDistanceAll();
+                currentMinute++;
+                setMinuteText();
+                //reportText.AppendText(myWay.List());
+                string exitstring = myWay.CheckIfExited();
+                if (exitstring.Length > 0)
+                    reportText.AppendText(exitstring + "\n");
+                DrawVehicles();
+            }
+            else
+            {
+                reportText.AppendText("End of Simulation.\n");
+                timer1.Enabled = false;
+            }
         }
 
         private void DrawVehicles()
@@ -127,6 +139,10 @@ namespace HighwayGUI
             int y = gPicBox.Top + (idx * (int)pixPerVeh);
             int width = gPicBox.Left + (int)horiz;
             int height = gPicBox.Top + (int)pixPerVeh - 5;
+
+            if (width > gPicBox.Width)
+                width = gPicBox.Width;
+
             Rectangle myRect = new Rectangle(x, y, width, height);
 
             int newX = myRect.Right - v.MyVehicleLength;
