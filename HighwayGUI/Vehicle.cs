@@ -1,4 +1,8 @@
-﻿using System;
+﻿//========================================================================
+//  Vehicle.cs
+//  This file is a class that encapsulates a Vehicle object
+//========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

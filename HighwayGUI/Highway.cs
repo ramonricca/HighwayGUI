@@ -1,4 +1,8 @@
-﻿using System;
+﻿//========================================================================
+//  Highway.cs
+//  This file is a class that encapsulates the representation of a highway
+//========================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace HighwayGUI
 {
+
     //========================================================================
     //  Class:  Highway
     //          This class is like a container of vehicles, each with their

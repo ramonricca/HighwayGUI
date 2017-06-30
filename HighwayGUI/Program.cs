@@ -16,7 +16,6 @@ namespace HighwayGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new HWindow());
             Application.Run(new InitHighway());
         }
     }

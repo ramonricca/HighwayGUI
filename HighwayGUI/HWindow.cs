@@ -1,4 +1,8 @@
-﻿using System;
+﻿//========================================================================
+//  HWindow.cs
+//  This file is the Highway GUI Form
+//========================================================================
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +14,9 @@ using System.Windows.Forms;
 
 namespace HighwayGUI
 {
+    //========================================================================
+    //  This is the form that shows the highway and vehicles
+    //========================================================================
     public partial class HWindow : Form
     {
         private const int graphicsmargin = 10;
@@ -21,11 +28,19 @@ namespace HighwayGUI
         private int maxVeh;
         private Rectangle gPicBox;
 
+        //========================================================================
+        //  HWindow
+        //  Constructor
+        //========================================================================
         public HWindow()
         {
             InitializeComponent();
         }
 
+        //========================================================================
+        //  HWindow
+        //  Overloaded Constructor
+        //========================================================================
         public HWindow(int len, int max, int minutes)
         {
             InitializeComponent();
@@ -44,12 +59,20 @@ namespace HighwayGUI
             DrawVehicles();
         }
 
+        //========================================================================
+        //  setMinuteText
+        //  Sets the tick count in the label to show elapsed time
+        //========================================================================
         public void setMinuteText()
         {
             string cur = "(" + currentMinute + " / " + maxMinutes + ")";
             minuteText.Text = cur;
         }
 
+        //========================================================================
+        //  bikeBtn_Click
+        //  This method is called when a bike is added
+        //========================================================================
         private void bikeBtn_Click(object sender, EventArgs e)
         {
             Random rand1 = new Random();
@@ -58,24 +81,40 @@ namespace HighwayGUI
             reportText.AppendText(myWay.OnRamp(bike) + "\n");
         }
 
+        //========================================================================
+        //  motoBtn_Click
+        //  This method is called when a moto is added
+        //========================================================================
         private void motoBtn_Click(object sender, EventArgs e)
         {
             Vehicle moto = new Vehicle(2, true, 50, 300, 1);
             reportText.AppendText(myWay.OnRamp(moto) + "\n");
         }
 
+        //========================================================================
+        //  carBtn_Click
+        //  This method is called when a car is added
+        //========================================================================
         private void carBtn_Click(object sender, EventArgs e)
         {
             Vehicle car = new Vehicle(4, true, 30, 550, 2);
             reportText.AppendText(myWay.OnRamp(car) + "\n");
         }
 
+        //========================================================================
+        //  truckBtn_Click
+        //  This method is called when a truck is added
+        //========================================================================
         private void truckBtn_Click(object sender, EventArgs e)
         {
             Vehicle truck = new Vehicle(18, true, 5, 3000, 3);
             reportText.AppendText(myWay.OnRamp(truck) + "\n");
         }
 
+        //========================================================================
+        //  trafficBtn_Click
+        //  This method is called when start/stop is clicked
+        //========================================================================
         private void trafficBtn_Click(object sender, EventArgs e)
         {
             timer1.Enabled = !startstop;
@@ -83,6 +122,11 @@ namespace HighwayGUI
             setStartStop();
         }
 
+        //========================================================================
+        //  SetStartStop
+        //  This method toggles the button to show 'Start' or 'Stop depending
+        //  on whether the highway is running or not.
+        //========================================================================
         private void setStartStop()
         {
             if (startstop == true)
@@ -95,6 +139,10 @@ namespace HighwayGUI
             }
         }
 
+        //========================================================================
+        //  time1_Tick
+        //  This method is called when the time ticks ahead
+        //========================================================================
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (currentMinute < maxMinutes)
@@ -115,6 +163,11 @@ namespace HighwayGUI
             }
         }
 
+        //========================================================================
+        //  DrawVehicles
+        //  This method is called when it is time to redraw the vehicles on the
+        //  road.
+        //========================================================================
         private void DrawVehicles()
         {
             System.Drawing.Graphics graphics = this.CreateGraphics();
@@ -130,6 +183,11 @@ namespace HighwayGUI
             }
         }
 
+        //========================================================================
+        //  calculateDistance
+        //  This method calculates the rectangles for the path leading up to the
+        //  vehicle, and for the vehicle itself.
+        //========================================================================
         private Rectangle[] calculateDistance(Vehicle v, int idx)
         {
             float pixPerMile = gPicBox.Width / highwayLength;
